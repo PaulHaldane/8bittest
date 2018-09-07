@@ -1,7 +1,13 @@
 #!/usr/bin/perl -sw
 
+my $showFilename = (@ARGV < 2) ? 0 : 1;
 while (<>) {
-	unless (/^[[:print:]]*$/aa) {
-		print "$ARGV:$.: $_";
+	unless (/^[[:print:][:cntrl:]]*$/a) {
+		if ($showFilename) {
+			print "$ARGV:$.: $_";
+		} else {
+			print "$.: $_";
+		}
 	}
+	close ARGV if eof;
 }
